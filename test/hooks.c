@@ -36,6 +36,11 @@
 	return (0);
 }*/
 
+
+//up 	= 126
+//down 	= 125
+//right = 124
+//left 	= 123
 int		keyhooks(int key, t_env *e)
 {
 	if (!(e->win))
@@ -50,6 +55,26 @@ int		keyhooks(int key, t_env *e)
 		sleep(1);
 		ft_putendl(".");
 		close_win(e);
+	}
+	else if (key == 126 && e->hit)
+	{
+		e->upkey = 1;
+		key_up(e);
+	}
+	else if (key == 125)
+	{
+		e->downkey = 1;
+		key_down(e);
+	}
+	else if (key == 124)
+	{
+		e->rightkey = 1;
+		key_right(e);
+	}
+	else if (key == 123)
+	{
+		e->leftkey = 1;
+		key_left(e);
 	}
 	return (0);
 	/*else if (key = 69)

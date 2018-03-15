@@ -85,6 +85,16 @@ typedef struct			s_env
 	int					drawstart;
 	int					drawend;
 
+	/*
+	**calcul
+	*/
+	double				movespeed;
+	double				rotspeed;
+	int					upkey;
+	int					downkey;
+	int					leftkey;
+	int					rightkey;
+
 	int					x;
 	int					y;
 	int					w;
@@ -107,5 +117,10 @@ int						close_win(t_env *e);
 int						keyhooks(int key, t_env *e);
 unsigned int			ft_getcolor(int i, double x, double y);
 void					texturing(t_env *e);
+void	key_up(t_env *e);
+void	key_down(t_env *e);
+void	key_right(t_env *e);
+void	key_left(t_env *e);
+void	revival(t_env *e);
 
 #endif

@@ -14,12 +14,12 @@ void	init_draw(t_env *e)
 	e->w = WIDTH;
 	e->h = HEIGHT;
 	e->textheight = 64;
-	//e->upkey = 0;
-	//e->downkey = 0;
-	//e->leftkey = 0;
-	//e->rightkey = 0;
-	//e->rotspeed = .2;
-	//e->movespeed = .2;
+	e->upkey = 0;
+	e->downkey = 0;
+	e->leftkey = 0;
+	e->rightkey = 0;
+	e->rotspeed = .2;
+	e->movespeed = .2;
 }
 
 void	init_env(t_env *e)
