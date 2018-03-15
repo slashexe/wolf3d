@@ -42,14 +42,32 @@ void	key_down(t_env *e)
 
 void	key_right(t_env *e)
 {
-
-	
-	e->movespeed = 2;
+	if (e->rightkey == 1)
+	{
+		ft_putendl("right");
+		e->olddirx = e->dirx;
+		e->dirx = e->dirx * cos(-e->rotspeed) - e->diry * sin(-e->rotspeed);
+		e->diry = e->olddirx * sin(-e->rotspeed) + e->diry * cos(-e->rotspeed);
+		e->oldplanex = e->planex;
+		e->planex = e->planex * cos(-e->rotspeed) - e->planey * sin(-e->rotspeed);
+		e->planey = e->oldplanex * sin(-e->rotspeed) + e->planey * cos(-e->rotspeed);
+		revival(e);
+	}
 }
 
 void	key_left(t_env *e)
 {
-	e->movespeed = 2;
+	if (e->leftkey == 1)
+	{
+		ft_putendl("left");
+		e->olddirx = e->dirx;
+		e->dirx = e->dirx * cos(e->rotspeed) - e->diry * sin(e->rotspeed);
+		e->diry = e->olddirx * sin(e->rotspeed) + e->diry * cos(e->rotspeed);
+		e->oldplanex = e->planex;
+		e->planex = e->planex * cos(e->rotspeed) - e->planey * sin(e->rotspeed);
+		e->planey = e->oldplanex * sin(e->rotspeed) + e->planey * cos(e->rotspeed);
+		revival(e);
+	}
 }
 
 void	revival(t_env *e)

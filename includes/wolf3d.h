@@ -90,6 +90,10 @@ typedef struct			s_env
 	*/
 	double				movespeed;
 	double				rotspeed;
+	double				olddirx;
+	double				olddiry;
+	double				oldplanex;
+	double				oldplaney;
 	int					upkey;
 	int					downkey;
 	int					leftkey;
