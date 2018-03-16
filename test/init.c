@@ -3,7 +3,7 @@
 void	init_draw(t_env *e)
 {
 	e->posx = 6;
-	e->posy = 8;
+	e->posy = 8.1;
 	e->dirx = -1;
 	e->diry = 0;
 	e->planex = 0;

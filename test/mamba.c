@@ -50,12 +50,15 @@ void			ver_line(t_env *e)
 	x = -1;
 	while (++x < (HEIGHT / 2))
 		e->imgpointer[e->x + (x * e->size_line / 4)] = 0xC00000AA;
+	x = 0;
 	while (++y < roger)
-		e->imgpointer[e->x + (y * e->size_line / 4)] = ft_getcolor(e->
-				color, e->x, y);
+	{
+		e->imgpointer[e->x + (y * e->size_line / 4)] = ft_getcolor(e->color, e->x, y);
+		x++;
+	}
 	x = roger - 1;
-	while (++x < (HEIGHT - 1))
-		e->imgpointer[e->x + (x * e->size_line / 4)] = 0xC00000AA;
+	/*while (++x < (HEIGHT - 1))
+		e->imgpointer[e->x + (x * e->size_line / 4)] = 0xC00000AA;*/
 }
 
 void			texturing(t_env *e)
@@ -90,35 +93,6 @@ void			texturing(t_env *e)
 		if(e->side == 1) 
 			color = (color >> 1) & 8355711;
         e->buffer[y][e->x] = color;
-
 		y++;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -42,7 +42,7 @@ void	gestion_win(t_env *e)
 	mlx_put_image_to_window(e->mlx, e->win, e->wall, 150, 250);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 
-	mlx_key_hook(e->win, keyhooks, e);
+	mlx_hook(e->win, 2, 1L<<0, keyhooks, e);
 	//mlx_loop_hook(e->mlx, loop, e);
 	mlx_loop(e->mlx);
 }
@@ -66,6 +66,7 @@ int		main(int argc, char **argv)
 	}
 	if (argc == 1)
 	{
+		init_env(e);
 		map(e);
 		lepivert(1);
 		gestion_win(e);

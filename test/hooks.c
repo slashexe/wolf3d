@@ -48,12 +48,6 @@ int		keyhooks(int key, t_env *e)
 	if (key == 53)
 	{
 		ft_putstr("Closing");
-		sleep(1);
-		ft_putstr(".");
-		sleep(1);
-		ft_putstr(".");
-		sleep(1);
-		ft_putendl(".");
 		close_win(e);
 	}
 	else if (key == 126 && e->hit)
