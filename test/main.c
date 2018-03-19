@@ -3,24 +3,6 @@
 /*
 **valeur pour mur = autre texture
 */
-void			map(t_env *e)
-{
-	e->worldmap[0] = "1111111111";
-	e->worldmap[1] = "1003000201";
-	e->worldmap[2] = "1003000201";
-	e->worldmap[3] = "1100000001";
-	e->worldmap[4] = "1000330001";
-	e->worldmap[5] = "1000033001";
-	e->worldmap[6] = "1004004001";
-	e->worldmap[7] = "1104444001";
-	e->worldmap[8] = "1000000001";
-	e->worldmap[9] = "1111111111";
-	
-	
-
-
-}
-
 void	lepivert(int a)
 {
 	if (a == 2)
@@ -55,21 +37,24 @@ int		main(int argc, char **argv)
 
 	if (!(e = (t_env *)ft_memalloc(sizeof(t_env))))
 			return (0);
-	argv = NULL;
-	if (argc < 1)
+	if (argc < 2)
 	{
 		ft_putendl("error: Not Enough Arguments");
 		lepivert(2);
 	}
-	if (argc > 1)
+	if (argc > 2)
 	{
-		ft_putendl("error: Too Enough Arguments");
+		ft_putendl("error: Too much Arguments");
 		lepivert(2);
 	}
-	if (argc == 1)
+	if (open_file(e, argv[1]) == 0)
+	{
+		ft_putendl("error Map");
+		lepivert(2);
+	}
+	if (argc == 2)
 	{
 		init_env(e);
-		map(e);
 		lepivert(1);
 		gestion_win(e);
 	}

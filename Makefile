@@ -7,6 +7,7 @@ SRC		 =		test/calc.c				\
 				test/hooks.c			\
 				test/init.c				\
 				test/move.c				\
+				test/read.c				\
 				test/mamba.c	
 
 OBJ		= $(patsubst src/%.c,obj/%.o,$(SRC))

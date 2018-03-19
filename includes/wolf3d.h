@@ -7,6 +7,7 @@
 # include "math.h"
 # include "stdio.h"
 # include "libft.h"
+# include "../libft/get_next_line.h"
 # include "../minilibx_macos/mlx.h"
 
 # define HEIGHT 500
@@ -16,7 +17,7 @@ typedef struct			s_env
 {
 	void				*mlx;
 	void				*win;
-	char				*worldmap[10];
+	char				**worldmap;
 	uint32_t			buffer[500][500];
 
 	/*
@@ -130,5 +131,6 @@ void	key_down(t_env *e);
 void	key_right(t_env *e);
 void	key_left(t_env *e);
 void	revival(t_env *e);
+int		open_file(t_env *e, char *file);
 
 #endif
