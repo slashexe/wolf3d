@@ -6,7 +6,7 @@
 /*   By: rlauret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 15:48:55 by rlauret           #+#    #+#             */
-/*   Updated: 2017/11/13 14:09:35 by rlauret          ###   ########.fr       */
+/*   Updated: 2018/03/18 17:37:36 by avinas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include "get_next_line.h"
 
 typedef unsigned long	t_size;
 typedef struct			s_list

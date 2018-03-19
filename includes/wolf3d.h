@@ -36,6 +36,10 @@ typedef struct			s_env
 	int					*imgfloor;
 	void				*wall;
 	int					*imgwall;
+	int					*imgwall_e;
+	int					*imgwall_o;
+	int					*imgwall_s;
+	int					*imgwall_n;
 	
 	int					sky_sl;
 	int					sky_bpp;

@@ -40,7 +40,9 @@ void			ver_line(t_env *e)
 	int		y;
 	int		roger;
 	int		x;
+	int		y_texture;
 
+	y_texture = 0;
 	roger = e->drawend;
 	if (roger > HEIGHT)
 		roger = HEIGHT - 1;
@@ -53,46 +55,29 @@ void			ver_line(t_env *e)
 	x = 0;
 	while (++y < roger)
 	{
-		e->imgpointer[e->x + (y * e->size_line / 4)] = ft_getcolor(e->color, e->x, y);
+		e->imgpointer[e->x + (y * e->size_line / 4)] = e->imgwall[e->x + (y_texture * e->wall_sl % 3600)];
 		x++;
+		y_texture++;
 	}
 	x = roger - 1;
 	/*while (++x < (HEIGHT - 1))
 		e->imgpointer[e->x + (x * e->size_line / 4)] = 0xC00000AA;*/
 }
 
-void			texturing(t_env *e)
+void	texturing(t_env *e)
 {
-	int		textnum;
-	int		textx;
-	int		texty;
-	int		y;
-	int		d;
-	double	wallx;
-	uint32_t color;
-
-	textnum = e->worldmap[e->mapx][e->mapy] - 1;
-	if (e->side == 0) 
-		wallx = e->posy + e->perpwalldist * e->raydiry;
-	else           
-		wallx = e->posx + e->perpwalldist * e->raydirx;
-	wallx -= floor((wallx));
-
-	textx = (int)(wallx * (double)(e->textheight));
-	if(e->side == 0 && e->raydirx > 0) 
-		textx = e->textheight - textx - 1;
-	if(e->side == 1 && e->raydiry < 0) 
-		textx = e->textheight - textx - 1;
-
-	y = e->drawstart;
-	while (y < e->drawend)
+	if (e->side)
 	{
-		d = y * 256 - e->h * 128 + e->lineheight * 128;
-		texty = ((d * e->textheight) / e->textheight) / 256;
-		color = 0xC00000AA;
-		if(e->side == 1) 
-			color = (color >> 1) & 8355711;
-        e->buffer[y][e->x] = color;
-		y++;
+		if (e->posy < e->mapy)
+			e->imgwall = e-> imgwall_s;
+		else
+			e->imgwall = e-> imgwall_n;	
+	}
+	else
+	{
+		if (e->posx < e->mapx)
+			e->imgwall = e-> imgwall_e;
+		else
+			e->imgwall = e-> imgwall_o;	
 	}
 }

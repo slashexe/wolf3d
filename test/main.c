@@ -15,6 +15,10 @@ void			map(t_env *e)
 	e->worldmap[7] = "1104444001";
 	e->worldmap[8] = "1000000001";
 	e->worldmap[9] = "1111111111";
+	
+	
+
+
 }
 
 void	lepivert(int a)
@@ -38,10 +42,8 @@ void	gestion_win(t_env *e)
 	draw(e);
 
 	mlx_put_image_to_window(e->mlx, e->win, e->skybox, 0, 0);
-	mlx_put_image_to_window(e->mlx, e->win, e->floors, 0, 300);
-	mlx_put_image_to_window(e->mlx, e->win, e->wall, 150, 250);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
-
+	mlx_hook(e->win, 17, 0, close_win, e);
 	mlx_hook(e->win, 2, 1L<<0, keyhooks, e);
 	//mlx_loop_hook(e->mlx, loop, e);
 	mlx_loop(e->mlx);

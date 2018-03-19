@@ -40,7 +40,22 @@ void	init_env(t_env *e)
 
 	e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/mossy.xpm",
 		&(e->wall_w), &(e->wall_h));
-	e->imgwall = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
+	e->imgwall_s = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
+		&(e->wall_sl), &(e->wall_end));
+
+	e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/greystone.xpm",
+		&(e->wall_w), &(e->wall_h));
+	e->imgwall_n = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
+		&(e->wall_sl), &(e->wall_end));
+
+	e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/colorstone.xpm",
+		&(e->wall_w), &(e->wall_h));
+	e->imgwall_e = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
+		&(e->wall_sl), &(e->wall_end));
+
+	e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/redbrick.xpm",
+		&(e->wall_w), &(e->wall_h));
+	e->imgwall_o = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
 		&(e->wall_sl), &(e->wall_end));
 
 	e->imgpointer = (int*)mlx_get_data_addr(e->img, 

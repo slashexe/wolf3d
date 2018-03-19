@@ -83,13 +83,17 @@ void	DDA(t_env *e)
 */
 void	calc_other(t_env *e)
 {
-
 	if (e->side == 0)
+	{
 		e->perpwalldist = (e->mapx - e->rayposx +
 				(1 - e->stepx) / 2) / e->raydirx;
+	}
 	else
+	{
 		e->perpwalldist = (e->mapy - e->rayposy +
 				(1 - e->stepy) / 2) / e->raydiry;
+		e->imgwall = e->imgwall_o;	
+	}
 	e->lineheight = (int)(e->h / e->perpwalldist);
 	e->drawstart = -(e->lineheight) / 2 + e->h / 2;
 	if (e->drawstart < 0)
@@ -100,10 +104,11 @@ void	calc_other(t_env *e)
 	
 	colorpick(e);
 	if (e->side == 1)
+	{
 		e->color = e->color / 2;
+	}
+	texturing(e);
 	ver_line(e);
-	//texturing(e);
-
 }
 
 
