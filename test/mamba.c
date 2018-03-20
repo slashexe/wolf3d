@@ -40,9 +40,7 @@ void			ver_line(t_env *e)
 	int		y;
 	int		roger;
 	int		x;
-	int		y_texture;
 
-	y_texture = 0;
 	roger = e->drawend;
 	if (roger > HEIGHT)
 		roger = HEIGHT - 1;
@@ -55,9 +53,7 @@ void			ver_line(t_env *e)
 	x = 0;
 	while (++y < roger)
 	{
-		e->imgpointer[e->x + (y * e->size_line / 4)] = e->imgwall[e->x + (y_texture * e->wall_sl % 3600)];
-		x++;
-		y_texture++;
+		e->imgpointer[e->x + (y * e->size_line / 4)] = e->imgwall[(int)(((int)(e->x) % e->wall_sl) + ((int)(y) * e->wall_sl % 3600))];
 	}
 	x = roger - 1;
 	/*while (++x < (HEIGHT - 1))

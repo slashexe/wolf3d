@@ -16,7 +16,7 @@ void	init_draw(t_env *e)
 	e->downkey = 0;
 	e->leftkey = 0;
 	e->rightkey = 0;
-	e->rotspeed = .2;
+	e->rotspeed = .1;
 	e->movespeed = .2;
 }
 
