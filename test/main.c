@@ -54,7 +54,6 @@ int		main(int argc, char **argv)
 	}
 	if (argc == 2)
 	{
-		init_env(e);
 		lepivert(1);
 		gestion_win(e);
 	}
