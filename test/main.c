@@ -3,17 +3,27 @@
 /*
 **valeur pour mur = autre texture
 */
-void	lepivert(int a)
+void	lepivert(int a, t_env *e)
 {
 	if (a == 2)
-		exit(1);
+    {
+        free(e->worldmap);
+        e->worldmap = NULL;
+        free(e);
+        e = NULL;
+        exit(1);
+    }
 	else
-		ft_putendl("Controls:\nArrow Keys & WASD to Move\n");
+		ft_putendl("Controls:\nArrow Keys to Move\n");
 }
 
 int		close_win(t_env *e)
 {
 	mlx_destroy_window(e->mlx, e->win);
+    free(e->worldmap);
+    e->worldmap = NULL;
+    free(e);
+    e = NULL;
 	exit(EXIT_SUCCESS);
 }
 
@@ -40,21 +50,21 @@ int		main(int argc, char **argv)
 	if (argc < 2)
 	{
 		ft_putendl("error: Not Enough Arguments");
-		lepivert(2);
+		lepivert(2, e);
 	}
 	if (argc > 2)
 	{
 		ft_putendl("error: Too much Arguments");
-		lepivert(2);
+		lepivert(2, e);
 	}
 	if (open_file(e, argv[1]) == 0)
 	{
 		ft_putendl("error Map");
-		lepivert(2);
+		lepivert(2, e);
 	}
 	if (argc == 2)
 	{
-		lepivert(1);
+		lepivert(1, e);
 		gestion_win(e);
 	}
 	return (0);
