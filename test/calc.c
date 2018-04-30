@@ -65,6 +65,7 @@ void	calc_step(t_env *e)
 **perform DDA (digital diffential analyzer)
 **loop increment square by square
 */
+
 void	DDA(t_env *e)
 {
 	while (e->hit == 0)
@@ -93,6 +94,7 @@ void	DDA(t_env *e)
 **4) x and y sides get different brightness
 **5) draw the pixels of the stripe as a vertical line
 */
+
 void	calc_other(t_env *e)
 {
 	if (e->side == 0)
@@ -122,7 +124,6 @@ void	calc_other(t_env *e)
 	texturing(e);
 	ver_line(e);
 }
-
 
 void	draw(t_env *e)
 {

@@ -1,79 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avinas <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/01 15:14:35 by avinas            #+#    #+#             */
+/*   Updated: 2018/04/01 15:14:37 by avinas           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/wolf3d.h"
 
-int		read_file(int fd, t_env *e, int y, char *line)
+int			create_map(int fd, t_env *e, int *y, char *line)
 {
-	int			cpt;
-	int			cptmp;
-	int			size;
-    
-    size = 0;
-    cpt = 0;
-	while (--y)
+	e->sizetmp = 0;
+	e->cpt = 0;
+	
+	while (--*y)
 	{
 		if (get_next_line(fd, &line) == 1)
 		{
-			if (y == 3)
+			if (*y == 3)
 			{
-				size = ft_atoi(line);
-				if (size < 3)
+				e->sizetmp = ft_atoi(line);
+				if (e->sizetmp < 3)
 					return (0);
 			}
-			else if (y == 2)
+			else if (*y == 2)
 				e->posx = ft_atoi(line) + 0.1;
 			else
 				e->posy = ft_atoi(line) + 0.1;
 		}
 		else
-        {
-            ft_strdel(&line);
+		{
+			ft_strdel(&line);
 			return (0);
-        }
-        ft_strdel(&line);
+		}
+		ft_strdel(&line);
 	}
+	return (1);
+}
+
+static int	del_line(char **line)
+{
+	ft_strdel(line);
+	return (0);
+}
+
+int			read_file(int fd, t_env *e, int y, char *line)
+{
+	int			cptmp;
+
+	if (!create_map(fd, e, &y, line))
+		return (0);
 	cptmp = -1;
-	e->worldmap = (char**)malloc(sizeof(char*) * size);
+	e->worldmap = (char**)malloc(sizeof(char*) * e->sizetmp);
 	while (get_next_line(fd, &line) == 1)
 	{
-		if (y == size)
+		if (y == e->sizetmp)
 			return (0);
-		cpt = 0;
-		while (line[cpt] != '\0')
+		e->cpt = -1;
+		while (line[++e->cpt] != '\0')
 		{
-			if (!(line[cpt] == '0' || line[cpt] == '1'))
-            {
-                ft_strdel(&line);
-				return (0);
-            }
-			if (y == 0 && line[cpt] != '1')
-            {
-                ft_strdel(&line);
-                return (0);
-            }
-			if (y == size - 1 && line[cpt] != '1')
-            {
-                ft_strdel(&line);
-                return (0);
-            }
-			cpt++;
+			if (!(line[e->cpt] == '0' || line[e->cpt] == '1'))
+				return (del_line(&line));
+			if (y == 0 && line[e->cpt] != '1')
+				return (del_line(&line));
+			if (y == e->sizetmp - 1 && line[e->cpt] != '1')
+				return (del_line(&line));
 		}
-		if ((cpt != cptmp && cptmp != -1) || cpt == 0)
+		if ((e->cpt != cptmp && cptmp != -1) || e->cpt == 0)
 			return (0);
-		cptmp = cpt;
-		if (line[cpt - 1] == '0' || line[0] == '0')
+		cptmp = e->cpt;
+		if (line[e->cpt - 1] == '0' || line[0] == '0')
 			return (0);
-		e->worldmap[y] = ft_strdup(line);
-        ft_strdel(&line);
-		y++;
+		e->worldmap[y++] = ft_strdup(line);
+		ft_strdel(&line);
 	}
-	if (!(e->posy < size && e->posy > 0 && e->posx < cpt && e->posx > 0))
+	if (!(e->posy < e->sizetmp && e->posy > 0
+			&& e->posx < e->cpt && e->posx > 0))
 		return (0);
-	printf("posx: %f ||\nposy: %f ||\n pos: %c ||\n", e->posx, e->posy, e->worldmap[(int)e->posy][(int)e->posx]);
 	if (e->worldmap[(int)e->posx][(int)e->posy] != '0')
 		return (0);
 	return (1);
 }
 
-int		open_file(t_env *e, char *file)
+int			open_file(t_env *e, char *file)
 {
 	int		fd;
 

@@ -12,6 +12,7 @@
 
 # define HEIGHT 500
 # define WIDTH 500
+# define MALL(x) if (!x) return (0);
 
 typedef struct			s_env
 {
@@ -110,6 +111,9 @@ typedef struct			s_env
 	int					h;
 
 	int					color;
+	int					sizetmp;
+	int					cpt;
+
 }						t_env;
 
 typedef	struct 			s_color
