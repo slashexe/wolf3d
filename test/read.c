@@ -6,7 +6,7 @@
 /*   By: avinas <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/01 15:14:35 by avinas            #+#    #+#             */
-/*   Updated: 2018/04/01 15:14:37 by avinas           ###   ########.fr       */
+/*   Updated: 2018/05/01 15:04:40 by avinas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int			create_map(int fd, t_env *e, int *y, char *line)
 {
 	e->sizetmp = 0;
 	e->cpt = 0;
-	
 	while (--*y)
 	{
 		if (get_next_line(fd, &line) == 1)
@@ -48,6 +47,25 @@ static int	del_line(char **line)
 	return (0);
 }
 
+static int	check_it(int y, int cptmp, t_env *e, char *line)
+{
+	if (y == e->sizetmp)
+		return (0);
+	e->cpt = -1;
+	while (line[++e->cpt] != '\0')
+	{
+		if (!(line[e->cpt] == '0' || line[e->cpt] == '1'))
+			return (del_line(&line));
+		if (y == 0 && line[e->cpt] != '1')
+			return (del_line(&line));
+		if (y == e->sizetmp - 1 && line[e->cpt] != '1')
+			return (del_line(&line));
+	}
+	if ((e->cpt != cptmp && cptmp != -1) || e->cpt == 0)
+		return (0);
+	return (1);
+}
+
 int			read_file(int fd, t_env *e, int y, char *line)
 {
 	int			cptmp;
@@ -58,19 +76,7 @@ int			read_file(int fd, t_env *e, int y, char *line)
 	e->worldmap = (char**)malloc(sizeof(char*) * e->sizetmp);
 	while (get_next_line(fd, &line) == 1)
 	{
-		if (y == e->sizetmp)
-			return (0);
-		e->cpt = -1;
-		while (line[++e->cpt] != '\0')
-		{
-			if (!(line[e->cpt] == '0' || line[e->cpt] == '1'))
-				return (del_line(&line));
-			if (y == 0 && line[e->cpt] != '1')
-				return (del_line(&line));
-			if (y == e->sizetmp - 1 && line[e->cpt] != '1')
-				return (del_line(&line));
-		}
-		if ((e->cpt != cptmp && cptmp != -1) || e->cpt == 0)
+		if (!check_it(y, cptmp, e, line))
 			return (0);
 		cptmp = e->cpt;
 		if (line[e->cpt - 1] == '0' || line[0] == '0')
@@ -79,7 +85,7 @@ int			read_file(int fd, t_env *e, int y, char *line)
 		ft_strdel(&line);
 	}
 	if (!(e->posy < e->sizetmp && e->posy > 0
-			&& e->posx < e->cpt && e->posx > 0))
+				&& e->posx < e->cpt && e->posx > 0))
 		return (0);
 	if (e->worldmap[(int)e->posx][(int)e->posy] != '0')
 		return (0);

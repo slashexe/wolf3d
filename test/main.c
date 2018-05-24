@@ -5,26 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avinas <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/01 15:14:35 by avinas            #+#    #+#             */
-/*   Updated: 2018/04/01 15:14:37 by avinas           ###   ########.fr       */
+/*   Created: 2018/04/30 16:51:03 by avinas            #+#    #+#             */
+/*   Updated: 2018/04/30 17:19:56 by avinas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
 /*
-**valeur pour mur = autre texture
+** valeur pour mur = autre texture
 */
+
 void	lepivert(int a, t_env *e)
 {
 	if (a == 2)
-    {
-        free(e->worldmap);
-        e->worldmap = NULL;
-        free(e);
-        e = NULL;
-        exit(1);
-    }
+	{
+		free(e->worldmap);
+		e->worldmap = NULL;
+		free(e);
+		e = NULL;
+		exit(1);
+	}
 	else
 		ft_putendl("Controls:\nArrow Keys to Move\n");
 }
@@ -32,10 +33,10 @@ void	lepivert(int a, t_env *e)
 int		close_win(t_env *e)
 {
 	mlx_destroy_window(e->mlx, e->win);
-    free(e->worldmap);
-    e->worldmap = NULL;
-    free(e);
-    e = NULL;
+	free(e->worldmap);
+	e->worldmap = NULL;
+	free(e);
+	e = NULL;
 	exit(EXIT_SUCCESS);
 }
 
@@ -44,12 +45,10 @@ void	gestion_win(t_env *e)
 	init_env(e);
 	init_draw(e);
 	draw(e);
-
 	mlx_put_image_to_window(e->mlx, e->win, e->skybox, 0, 0);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 	mlx_hook(e->win, 17, 0, close_win, e);
-	mlx_hook(e->win, 2, 1L<<0, keyhooks, e);
-	//mlx_loop_hook(e->mlx, loop, e);
+	mlx_hook(e->win, 2, 1L << 0, keyhooks, e);
 	mlx_loop(e->mlx);
 }
 
@@ -58,7 +57,7 @@ int		main(int argc, char **argv)
 	t_env		*e;
 
 	if (!(e = (t_env *)ft_memalloc(sizeof(t_env))))
-			return (0);
+		return (0);
 	if (argc < 2)
 	{
 		ft_putendl("error: Not Enough Arguments");

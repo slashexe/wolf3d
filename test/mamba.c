@@ -6,7 +6,7 @@
 /*   By: avinas <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/01 15:14:35 by avinas            #+#    #+#             */
-/*   Updated: 2018/04/01 15:14:37 by avinas           ###   ########.fr       */
+/*   Updated: 2018/05/16 18:06:24 by avinas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ unsigned int	ft_getcolor(int i, double x, double y)
 	str_color.col[0] = (unsigned char)(sin(0.026 * a + 4) * 230 + 25);
 	str_color.col[1] = (unsigned char)(sin(0.023 * a + 2) * 230 + 25);
 	str_color.col[2] = (unsigned char)(sin(0.01 * a + 1) * 230 + 25);
-	color = (str_color.col[0] << 16) + (str_color.col[1] << 8) + (str_color.col[2] + 255);
+	color = (str_color.col[0] << 16) + (str_color.col[1] << 8) +
+	(str_color.col[2] + 255);
 	return (color);
 }
 
@@ -65,27 +66,26 @@ void			ver_line(t_env *e)
 	x = 0;
 	while (++y < roger)
 	{
-		e->imgpointer[e->x + (y * e->size_line / 4)] = e->imgwall[(int)(((int)(e->x) % e->wall_sl) + ((int)(y) * e->wall_sl % 3600))];
+		e->imgpointer[e->x + (y * e->size_line / 4)] = e->imgwall
+		[(int)(((int)(e->x) % e->wall_sl) + ((int)(y) * e->wall_sl % 3600))];
 	}
 	x = roger - 1;
-	/*while (++x < (HEIGHT - 1))
-		e->imgpointer[e->x + (x * e->size_line / 4)] = 0xC00000AA;*/
 }
 
-void	texturing(t_env *e)
+void			texturing(t_env *e)
 {
 	if (e->side)
 	{
 		if (e->posy < e->mapy)
-			e->imgwall = e-> imgwall_s;
+			e->imgwall = e->imgwall_s;
 		else
-			e->imgwall = e-> imgwall_n;	
+			e->imgwall = e->imgwall_n;
 	}
 	else
 	{
 		if (e->posx < e->mapx)
-			e->imgwall = e-> imgwall_e;
+			e->imgwall = e->imgwall_e;
 		else
-			e->imgwall = e-> imgwall_o;	
+			e->imgwall = e->imgwall_o;
 	}
 }

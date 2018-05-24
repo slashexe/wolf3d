@@ -6,7 +6,7 @@
 /*   By: avinas <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/01 15:14:35 by avinas            #+#    #+#             */
-/*   Updated: 2018/04/01 15:14:37 by avinas           ###   ########.fr       */
+/*   Updated: 2018/04/30 19:01:15 by avinas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ void	key_right(t_env *e)
 		e->dirx = e->dirx * cos(-e->rotspeed) - e->diry * sin(-e->rotspeed);
 		e->diry = e->olddirx * sin(-e->rotspeed) + e->diry * cos(-e->rotspeed);
 		e->oldplanex = e->planex;
-		e->planex = e->planex * cos(-e->rotspeed) - e->planey * sin(-e->rotspeed);
-		e->planey = e->oldplanex * sin(-e->rotspeed) + e->planey * cos(-e->rotspeed);
+		e->planex = e->planex * cos(-e->rotspeed) -
+		e->planey * sin(-e->rotspeed);
+		e->planey = e->oldplanex * sin(-e->rotspeed) +
+		e->planey * cos(-e->rotspeed);
 		revival(e);
 	}
 }
@@ -71,7 +73,8 @@ void	key_left(t_env *e)
 		e->diry = e->olddirx * sin(e->rotspeed) + e->diry * cos(e->rotspeed);
 		e->oldplanex = e->planex;
 		e->planex = e->planex * cos(e->rotspeed) - e->planey * sin(e->rotspeed);
-		e->planey = e->oldplanex * sin(e->rotspeed) + e->planey * cos(e->rotspeed);
+		e->planey = e->oldplanex * sin(e->rotspeed) +
+		e->planey * cos(e->rotspeed);
 		revival(e);
 	}
 }
@@ -79,14 +82,10 @@ void	key_left(t_env *e)
 void	revival(t_env *e)
 {
 	mlx_destroy_image(e->mlx, e->img);
-	
-    
 	e->img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
-    e->imgpointer = (int*)mlx_get_data_addr(e->img,
-    &(e->bpp), &(e->size_line), &(e->endian));
-    
+	e->imgpointer = (int*)mlx_get_data_addr(e->img,
+	&(e->bpp), &(e->size_line), &(e->endian));
 	draw(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->skybox, 0, 0);
-	mlx_put_image_to_window(e->mlx, e->win, e->floors, 0, 300);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 }

@@ -6,18 +6,21 @@
 /*   By: avinas <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/01 15:14:35 by avinas            #+#    #+#             */
-/*   Updated: 2018/04/01 15:14:37 by avinas           ###   ########.fr       */
+/*   Updated: 2018/05/01 16:57:54 by avinas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
 /*
 **calculate ray position and direction
 **-x = coordinate in camera space
 **-mapx/mapy = which box of the map we're in
-**-delta = length of ray from one x or y-side to next x or y-side (pas le droit a abs())
+**-delta = length of ray from one x or y-side
+**to next x or y-side (pas le droit a abs())
 **-hit = wall hit
 */
+
 void	calc_ray(t_env *e)
 {
 	e->camerax = 2 * e->x / (double)e->w - 1;
@@ -37,6 +40,7 @@ void	calc_ray(t_env *e)
 /*
 **calculate step and initial sideDist
 */
+
 void	calc_step(t_env *e)
 {
 	if (e->raydirx < 0)
@@ -66,7 +70,7 @@ void	calc_step(t_env *e)
 **loop increment square by square
 */
 
-void	DDA(t_env *e)
+void	dda(t_env *e)
 {
 	while (e->hit == 0)
 	{
@@ -106,7 +110,7 @@ void	calc_other(t_env *e)
 	{
 		e->perpwalldist = (e->mapy - e->rayposy +
 				(1 - e->stepy) / 2) / e->raydiry;
-		e->imgwall = e->imgwall_o;	
+		e->imgwall = e->imgwall_o;
 	}
 	e->lineheight = (int)(e->h / e->perpwalldist);
 	e->drawstart = -(e->lineheight) / 2 + e->h / 2;
@@ -115,7 +119,6 @@ void	calc_other(t_env *e)
 	e->drawend = e->lineheight / 2 + e->h / 2;
 	if (e->drawend >= e->h)
 		e->drawend = e->h - 1;
-	
 	colorpick(e);
 	if (e->side == 1)
 	{
@@ -132,7 +135,7 @@ void	draw(t_env *e)
 	{
 		calc_ray(e);
 		calc_step(e);
-		DDA(e);
+		dda(e);
 		calc_other(e);
 	}
 }

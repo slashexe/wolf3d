@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wolf3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avinas <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/01 16:33:37 by avinas            #+#    #+#             */
+/*   Updated: 2018/05/01 16:55:35 by avinas           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WOLF3D_H
 # define WOLF3D_H
-
 # include "unistd.h"
 # include "stdlib.h"
 # include "fcntl.h"
@@ -9,10 +20,8 @@
 # include "libft.h"
 # include "../libft/get_next_line.h"
 # include "../minilibx_macos/mlx.h"
-
-# define HEIGHT 500
-# define WIDTH 500
-# define MALL(x) if (!x) return (0);
+# define HEIGHT 1200
+# define WIDTH 2000
 
 typedef struct			s_env
 {
@@ -21,49 +30,31 @@ typedef struct			s_env
 	char				**worldmap;
 	uint32_t			buffer[500][500];
 
-	/*
-	**gestion image
-	*/
 	void				*img;
 	int					*imgpointer;
 	int					size_line;
 	int					bpp;
 	int					endian;
-	/*
-	**gestion texture
-	*/
 	void				*skybox;
 	int					*imgsky;
-	void				*floors;
-	int					*imgfloor;
 	void				*wall;
 	int					*imgwall;
 	int					*imgwall_e;
 	int					*imgwall_o;
 	int					*imgwall_s;
 	int					*imgwall_n;
-	
+
 	int					sky_sl;
 	int					sky_bpp;
 	int					sky_end;
 	int					sky_h;
 	int					sky_w;
-////////////////////////////////////
-	int					floor_sl;
-	int					floor_bpp;
-	int					floor_end;
-	int					floor_h;
-	int					floor_w;
-////////////////////////////////////
 	int					wall_sl;
 	int					wall_bpp;
 	int					wall_end;
 	int					wall_h;
 	int					wall_w;
 
-	/*
-	**calcul
-	*/
 	double				camerax;
 	double				rayposx;
 	double				rayposy;
@@ -91,9 +82,6 @@ typedef struct			s_env
 	int					drawstart;
 	int					drawend;
 
-	/*
-	**calcul
-	*/
 	double				movespeed;
 	double				rotspeed;
 	double				olddirx;
@@ -116,7 +104,7 @@ typedef struct			s_env
 
 }						t_env;
 
-typedef	struct 			s_color
+typedef	struct			s_color
 {
 	unsigned char		col[3];
 }						t_color;
@@ -130,11 +118,11 @@ int						close_win(t_env *e);
 int						keyhooks(int key, t_env *e);
 unsigned int			ft_getcolor(int i, double x, double y);
 void					texturing(t_env *e);
-void	key_up(t_env *e);
-void	key_down(t_env *e);
-void	key_right(t_env *e);
-void	key_left(t_env *e);
-void	revival(t_env *e);
-int		open_file(t_env *e, char *file);
+void					key_up(t_env *e);
+void					key_down(t_env *e);
+void					key_right(t_env *e);
+void					key_left(t_env *e);
+void					revival(t_env *e);
+int						open_file(t_env *e, char *file);
 
 #endif
