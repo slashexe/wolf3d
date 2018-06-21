@@ -73,7 +73,8 @@ int			read_file(int fd, t_env *e, int y, char *line)
 	if (!create_map(fd, e, &y, line))
 		return (0);
 	cptmp = -1;
-	e->worldmap = (char**)malloc(sizeof(char*) * e->sizetmp);
+	if (!(e->worldmap = (char**)malloc(sizeof(char*) * e->sizetmp)))
+		return (0);
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (!check_it(y, cptmp, e, line))

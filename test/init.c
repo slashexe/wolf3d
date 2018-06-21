@@ -29,31 +29,45 @@ void	init_draw(t_env *e)
 	e->movespeed = .2;
 }
 
-void	init_env(t_env *e)
+void	init_env2(t_env *e)
 {
-	e->mlx = mlx_init();
-	e->img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
-	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "Wolf3D");
-	e->skybox = mlx_xpm_file_to_image(e->mlx, "./texture/skybox.xpm",
-			&(e->sky_w), &(e->sky_h));
-	e->imgsky = (int*)mlx_get_data_addr(e->skybox, &(e->sky_bpp),
-			&(e->sky_sl), &(e->sky_end));
-	e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/colorstone.xpm",
-			&(e->wall_w), &(e->wall_h));
-	e->imgwall_s = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
-			&(e->wall_sl), &(e->wall_end));
-	e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/greystone.xpm",
-			&(e->wall_w), &(e->wall_h));
-	e->imgwall_n = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
-			&(e->wall_sl), &(e->wall_end));
-	e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/purplestone.xpm",
-			&(e->wall_w), &(e->wall_h));
 	e->imgwall_e = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
 			&(e->wall_sl), &(e->wall_end));
-	e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/redbrick.xpm",
-			&(e->wall_w), &(e->wall_h));
+	if (!(e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/redbrick.xpm",
+			&(e->wall_w), &(e->wall_h))))
+		lepivert(2, e);
 	e->imgwall_o = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
 			&(e->wall_sl), &(e->wall_end));
 	e->imgpointer = (int*)mlx_get_data_addr(e->img,
 			&(e->bpp), &(e->size_line), &(e->endian));
+}
+
+void	init_env(t_env *e)
+{
+	if (!(e->mlx = mlx_init()))
+		lepivert(2, e);
+	if (!(e->img = mlx_new_image(e->mlx, WIDTH, HEIGHT)))
+		lepivert(2, e);
+	if (!(e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "Wolf3D")))
+		lepivert(2, e);
+	if (!(e->skybox = mlx_xpm_file_to_image(e->mlx, "./texture/skybox.xpm",
+			&(e->sky_w), &(e->sky_h))))
+		lepivert(2, e);
+	e->imgsky = (int*)mlx_get_data_addr(e->skybox, &(e->sky_bpp),
+			&(e->sky_sl), &(e->sky_end));
+	if (!(e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/colorstone.xpm",
+			&(e->wall_w), &(e->wall_h))))
+		lepivert(2, e);
+	e->imgwall_s = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
+			&(e->wall_sl), &(e->wall_end));
+	if (!(e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/greystone.xpm",
+			&(e->wall_w), &(e->wall_h))))
+		lepivert(2, e);
+	e->imgwall_n = (int*)mlx_get_data_addr(e->wall, &(e->wall_bpp),
+			&(e->wall_sl), &(e->wall_end));
+	init_env2(e);
+	if (!(e->wall = mlx_xpm_file_to_image(e->mlx, "./texture/purplestone.xpm",
+			&(e->wall_w), &(e->wall_h))))
+		lepivert(2, e);
+	init_env2(e);
 }

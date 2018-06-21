@@ -90,8 +90,8 @@ all: $(NAME)
 $(NAME): $(OBJS) $(NAME).a
 
 %.a: $(OBJS)	
-	ar rc $(NAME).a $(OBJS)
-	ranlib $(NAME).a
+	@ar rc $(NAME).a $(OBJS)
+	@ranlib $(NAME).a
 
 clean:
 	/bin/rm -f $(OBJS)
@@ -102,4 +102,4 @@ fclean: clean
 re: fclean all
 
 %.o: %.c
-	gcc -c $< -o $@
+	@gcc -c $< -o $@

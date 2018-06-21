@@ -82,7 +82,8 @@ void	key_left(t_env *e)
 void	revival(t_env *e)
 {
 	mlx_destroy_image(e->mlx, e->img);
-	e->img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
+	if (!(e->img = mlx_new_image(e->mlx, WIDTH, HEIGHT)))
+		lepivert(2, e);
 	e->imgpointer = (int*)mlx_get_data_addr(e->img,
 	&(e->bpp), &(e->size_line), &(e->endian));
 	draw(e);

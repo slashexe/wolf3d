@@ -22,6 +22,7 @@
 # include "../minilibx_macos/mlx.h"
 # define HEIGHT 1200
 # define WIDTH 2000
+//# define MALLCHECK(x) if (!x) lepivert(2);
 
 typedef struct			s_env
 {
@@ -124,5 +125,6 @@ void					key_right(t_env *e);
 void					key_left(t_env *e);
 void					revival(t_env *e);
 int						open_file(t_env *e, char *file);
+void					lepivert(int a, t_env *e);
 
 #endif

@@ -51,12 +51,10 @@ unsigned int	ft_getcolor(int i, double x, double y)
 void			ver_line(t_env *e)
 {
 	int		y;
-	int		roger;
 	int		x;
 
-	roger = e->drawend;
-	if (roger > HEIGHT)
-		roger = HEIGHT - 1;
+	if (e->drawend > HEIGHT)
+		e->drawend = HEIGHT - 1;
 	y = e->drawstart;
 	if (y < 0)
 		y = 0;
@@ -64,12 +62,12 @@ void			ver_line(t_env *e)
 	while (++x < (HEIGHT / 2))
 		e->imgpointer[e->x + (x * e->size_line / 4)] = 0xC00000AA;
 	x = 0;
-	while (++y < roger)
+	while (++y < e->drawend)
 	{
 		e->imgpointer[e->x + (y * e->size_line / 4)] = e->imgwall
 		[(int)(((int)(e->x) % e->wall_sl) + ((int)(y) * e->wall_sl % 3600))];
 	}
-	x = roger - 1;
+	x = e->drawend - 1;
 }
 
 void			texturing(t_env *e)
