@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -12,13 +13,22 @@
 
 #include "../includes/wolf3d.h"
 
+/*
+**calculate ray position and direction
+**-x = coordinate in camera space
+**-mapx/mapy = which box of the map we're in
+**-delta = length of ray from one x or y-side
+**to next x or y-side (pas le droit a abs())
+**-hit = wall hit
+*/
+
 void	calc_ray(t_env *e)
 {
-	e->cam = 2 * e->x / (double)e->w - 1;
+	e->camerax = 2 * e->x / (double)e->w - 1;
 	e->posx = e->posx;
 	e->posy = e->posy;
-	e->raydirx = e->dirx + e->planex * e->cam;
-	e->raydiry = e->diry + e->planey * e->cam;
+	e->raydirx = e->dirx + e->planex * e->camerax;
+	e->raydiry = e->diry + e->planey * e->camerax;
 	e->mapx = (int)e->posx;
 	e->mapy = (int)e->posy;
 	e->deltadistx = sqrt(1 + (e->raydiry *
@@ -27,6 +37,10 @@ void	calc_ray(t_env *e)
 				e->raydirx) / (e->raydiry * e->raydiry));
 	e->hit = 0;
 }
+
+/*
+**calculate step and initial sideDist
+*/
 
 void	calc_step(t_env *e)
 {
@@ -52,6 +66,11 @@ void	calc_step(t_env *e)
 	}
 }
 
+/*
+**perform DDA (digital diffential analyzer)
+**loop increment square by square
+*/
+
 void	dda(t_env *e)
 {
 	while (e->hit == 0)
@@ -72,6 +91,14 @@ void	dda(t_env *e)
 			e->hit = 1;
 	}
 }
+
+/*
+**1) calc distance from wall (Euclidean distance will give fisheye effect!)
+**2) lineheight height of line to draw on screen
+**3) pick a color
+**4) x and y sides get different brightness
+**5) draw the pixels of the stripe as a vertical line
+*/
 
 void	calc_other(t_env *e)
 {

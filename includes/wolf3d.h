@@ -56,13 +56,11 @@ typedef struct			s_env
 	int					wall_h;
 	int					wall_w;
 
-	double				camerax;
-	double				rayposx;
-	double				rayposy;
-	double				raydirx;
-	double				raydiry;
+	double				cam;
 	double				posx;
 	double				posy;
+	double				raydirx;
+	double				raydiry;
 	double				dirx;
 	double				diry;
 	double				planex;
