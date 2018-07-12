@@ -56,24 +56,22 @@ typedef struct			s_env
 	int					wall_w;
 
 	double				wall_x;
-	double				camerax;
-	double				rayposx;
-	double				rayposy;
-	double				raydirx;
-	double				raydiry;
+	double				cam;
 	double				posx;
 	double				posy;
+	double				raydirx;
+	double				raydiry;
 	double				dirx;
 	double				diry;
 	double				planex;
 	double				planey;
-	double				deltadistx;
-	double				deltadisty;
-	double				sidedistx;
-	double				sidedisty;
-	double				perpwalldist;
-	int					stepx;
-	int					stepy;
+	double				pointdistx;
+	double				pointdisty;
+	double				oridistx;
+	double				oridisty;
+	double				walldist;
+	int					yesx;
+	int					yesy;
 	int					mapx;
 	int					mapy;
 	int					mapx_tmp;
@@ -107,13 +105,7 @@ typedef struct			s_env
 	int					color;
 	int					sizetmp;
 	int					cpt;
-
 }						t_env;
-
-typedef	struct			s_color
-{
-	unsigned char		col[3];
-}						t_color;
 
 void					colorpick(t_env *e);
 void					init_draw(t_env *e);

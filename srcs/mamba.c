@@ -12,32 +12,13 @@
 
 #include "../includes/wolf3d.h"
 
-void			colorpick(t_env *e)
-{
-	char tmp;
-
-	tmp = e->worldmap[e->mapx][e->mapy];
-	if (tmp == '1')
-		e->color = 0x00FFFF;
-	else if (tmp == '2')
-	{
-		e->color = 0x0000FF;
-	}
-	else if (tmp == '3')
-		e->color = 0x9400D3;
-	else if (tmp == '4')
-		e->color = 0xFF8C00;
-	else if (tmp == '0')
-		e->color = 0x008080;
-}
-
 void			set_texture(t_env *e)
 {
 	e->tex_y = 0;
 	if (e->side == 0)
-		e->wall_x = e->posy + e->perpwalldist * e->raydiry;
+		e->wall_x = e->posy + e->walldist * e->raydiry;
 	else
-		e->wall_x = e->posx + e->perpwalldist * e->raydirx;
+		e->wall_x = e->posx + e->walldist * e->raydirx;
 	e->wall_x -= floor(e->wall_x);
 	if (e->mapx_tmp != e->mapx || e->mapy_tmp != e->mapy)
 	{
